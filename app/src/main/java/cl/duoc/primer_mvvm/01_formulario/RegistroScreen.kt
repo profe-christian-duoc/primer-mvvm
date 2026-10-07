@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.*
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
@@ -14,6 +15,9 @@ fun RegistroScreen(
     modifier: Modifier = Modifier,
     viewModel: RegistroViewModel = viewModel()
 ) {
+    // variable para mantener la sincronizacion de los estados
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -27,16 +31,16 @@ fun RegistroScreen(
         )
 
         OutlinedTextField(
-            value = viewModel.nombre,
+            value = uiState.nombre,
             onValueChange = {
-                viewModel.nombre = it
+                viewModel.cambiarNombre(it)
             },
             label = {
                 Text("Nombre")
             },
-            isError = viewModel.errorNombre,
+            isError = uiState.errorNombre,
             supportingText = {
-                if (viewModel.errorNombre) {
+                if (uiState.errorNombre) {
                     Text("El nombre es obligatorio")
                 }
             },
@@ -44,16 +48,16 @@ fun RegistroScreen(
         )
 
         OutlinedTextField(
-            value = viewModel.apellido,
+            value = uiState.apellido,
             onValueChange = {
-                viewModel.apellido = it
+                viewModel.cambiarApellido(it)
             },
             label = {
                 Text("Apellido")
             },
-            isError = viewModel.errorApellido,
+            isError = uiState.errorApellido,
             supportingText = {
-                if (viewModel.errorApellido) {
+                if (uiState.errorApellido) {
                     Text("El apellido es obligatorio")
                 }
             },
@@ -61,16 +65,16 @@ fun RegistroScreen(
         )
 
         OutlinedTextField(
-            value = viewModel.correo,
+            value = uiState.correo,
             onValueChange = {
-                viewModel.correo = it
+                viewModel.cambiarCorreo(it)
             },
             label = {
                 Text("Correo")
             },
-            isError = viewModel.errorCorreo,
+            isError = uiState.errorCorreo,
             supportingText = {
-                if (viewModel.errorCorreo) {
+                if (uiState.errorCorreo) {
                     Text("Ingrese un correo válido terminado en .cl")
                 }
             },
@@ -78,17 +82,17 @@ fun RegistroScreen(
         )
 
         OutlinedTextField(
-            value = viewModel.password,
+            value = uiState.password,
             onValueChange = {
-                viewModel.password = it
+                viewModel.cambiarPassword(it)
             },
             label = {
                 Text("Contraseña")
             },
             visualTransformation = PasswordVisualTransformation(),
-            isError = viewModel.errorPassword,
+            isError = uiState.errorPassword,
             supportingText = {
-                if (viewModel.errorPassword) {
+                if (uiState.errorPassword) {
                     Text("Debe contener al menos 8 caracteres")
                 }
             },
@@ -96,17 +100,17 @@ fun RegistroScreen(
         )
 
         OutlinedTextField(
-            value = viewModel.repetirPassword,
+            value = uiState.repetirPassword,
             onValueChange = {
-                viewModel.repetirPassword = it
+                viewModel.cambiarRepetirPassword(it)
             },
             label = {
                 Text("Repetir contraseña")
             },
             visualTransformation = PasswordVisualTransformation(),
-            isError = viewModel.errorRepetirPassword,
+            isError = uiState.errorRepetirPassword,
             supportingText = {
-                if (viewModel.errorRepetirPassword) {
+                if (uiState.errorRepetirPassword) {
                     Text("Las contraseñas no coinciden")
                 }
             },
@@ -118,16 +122,16 @@ fun RegistroScreen(
         ) {
 
             Checkbox(
-                checked = viewModel.aceptaTerminos,
+                checked = uiState.aceptaTerminos,
                 onCheckedChange = {
-                    viewModel.aceptaTerminos = it
+                    viewModel.cambiarTerminos(it)
                 }
             )
 
             Text("Acepto los términos y condiciones")
         }
 
-        if (viewModel.errorTerminos) {
+        if (uiState.errorTerminos) {
             Text(
                 text = "Debe aceptar los términos y condiciones",
                 color = MaterialTheme.colorScheme.error
