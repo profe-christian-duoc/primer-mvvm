@@ -1,8 +1,16 @@
-package cl.duoc.primer_mvvm.`01_formulario`
+package cl.duoc.primer_mvvm.ui.registro
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import cl.duoc.primer_mvvm.util.passwordsCoinciden
+import cl.duoc.primer_mvvm.util.validarApellido
+import cl.duoc.primer_mvvm.util.validarCorreo
+import cl.duoc.primer_mvvm.util.validarNombre
+import cl.duoc.primer_mvvm.util.validarPassword
+import cl.duoc.primer_mvvm.data.AppDatabase
+import cl.duoc.primer_mvvm.data.UsuarioRepository
+import cl.duoc.primer_mvvm.model.Usuario
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

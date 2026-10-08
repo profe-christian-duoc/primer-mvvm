@@ -1,4 +1,4 @@
-package cl.duoc.primer_mvvm.`01_formulario`
+package cl.duoc.primer_mvvm.model
 
 import androidx.room3.Entity
 import androidx.room3.PrimaryKey

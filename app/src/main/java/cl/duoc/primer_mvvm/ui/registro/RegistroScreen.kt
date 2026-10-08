@@ -1,4 +1,4 @@
-package cl.duoc.primer_mvvm.`01_formulario`
+package cl.duoc.primer_mvvm.ui.registro
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

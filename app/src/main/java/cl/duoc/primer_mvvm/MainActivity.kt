@@ -10,8 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import cl.duoc.primer_mvvm.`01_formulario`.RegistroScreen
+import cl.duoc.primer_mvvm.ui.registro.RegistroScreen
 import cl.duoc.primer_mvvm.ui.theme.PrimermvvmTheme
+import cl.duoc.primer_mvvm.ui.usuarios.UsuariosScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PrimermvvmTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    RegistroScreen(
+                    UsuariosScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

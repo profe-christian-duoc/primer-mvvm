@@ -1,4 +1,4 @@
-package cl.duoc.primer_mvvm.`01_formulario`
+package cl.duoc.primer_mvvm.util
 
 fun validarNombre(nombre: String): Boolean {
     return nombre.isNotBlank()

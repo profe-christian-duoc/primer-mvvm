@@ -1,8 +1,9 @@
-package cl.duoc.primer_mvvm.`01_formulario`
+package cl.duoc.primer_mvvm.data
 import android.content.Context
 import androidx.room3.Database
 import androidx.room3.Room
 import androidx.room3.RoomDatabase
+import cl.duoc.primer_mvvm.model.Usuario
 
 
 @Database(
