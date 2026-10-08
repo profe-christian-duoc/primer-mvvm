@@ -1,15 +1,21 @@
 package cl.duoc.primer_mvvm.`01_formulario`
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class RegistroViewModel : ViewModel() {
+class RegistroViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+    private val database = AppDatabase.getInstance(application)
+    private val repository = UsuarioRepository(database.usuarioDao())
+
     private val _uiState = MutableStateFlow(RegistroUiState())
     val uiState: StateFlow<RegistroUiState> = _uiState.asStateFlow()
 
@@ -80,7 +86,17 @@ class RegistroViewModel : ViewModel() {
                     !errorTerminos
 
         if (formularioValido) {
-            println("Usuario registrado correctamente")
+            val usuario = Usuario(
+                nombre = estado.nombre,
+                apellido = estado.apellido,
+                correo = estado.correo,
+                password = estado.password,
+            )
+            viewModelScope.launch {
+                repository.guardar(usuario)
+                println("Usuario registrado correctamente")
+            }
+
             _uiState.value = RegistroUiState()
         }
 
